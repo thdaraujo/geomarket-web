@@ -1,0 +1,15 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  titulo: MyString
+  corpo: MyString
+  link: MyString
+  dataInicio: 2014-07-22 16:11:55
+  dataFim: 2014-07-22 16:11:55
+
+two:
+  titulo: MyString
+  corpo: MyString
+  link: MyString
+  dataInicio: 2014-07-22 16:11:55
+  dataFim: 2014-07-22 16:11:55
