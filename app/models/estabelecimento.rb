@@ -24,4 +24,20 @@ class Estabelecimento < ActiveRecord::Base
   def clear_password
     self.password = nil
   end
+  
+  def self.authenticate(username_or_email="", login_password="")
+    if  EMAIL_REGEX.match(username_or_email)    
+      estabelecimento = Estabelecimento.find_by_email(username_or_email)
+    else
+      estabelecimento = Estabelecimento.find_by_nome(username_or_email)
+    end
+    if estabelecimento && estabelecimento.match_password(login_password)
+      return estabelecimento
+    else
+      return false
+    end
+  end   
+  def match_password(login_password="")
+    hashsenha == BCrypt::Engine.hash_secret(login_password, salt)
+  end
 end

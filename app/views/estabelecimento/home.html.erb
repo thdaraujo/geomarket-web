@@ -1,0 +1,3 @@
+<% @page_title = "GeoMarket! | #{@current_user.nome}" -%>
+  <h2 class='User_Header'>Perfil de <%=@current_user.nome%><h2>
+<%= link_to "Logout", :controller => "Estabelecimento", :action => "logout" %>
