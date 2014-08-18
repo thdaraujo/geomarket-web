@@ -1,0 +1,2 @@
+module PropagandaHelper
+end

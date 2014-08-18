@@ -1,4 +1,16 @@
 Rails.application.routes.draw do
+  get 'propaganda/new'
+
+  get 'propaganda/create'
+
+  get 'propaganda/update'
+
+  get 'propaganda/delete'
+
+  get 'propaganda/index'
+
+  get 'propaganda/show'
+
   get 'home/index'
 
   root 'home#index'

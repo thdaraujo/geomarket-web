@@ -1,0 +1,7 @@
+<h1><%= @propaganda.titulo %></h1>
+<p><%= @propaganda.corpo %></p>
+<p><%= link_to @propaganda.link, @propaganda.link %></p>
+<p>Começa em: <%= @propaganda.dataInicio %></p>
+<p>Termina em: <%= @propaganda.dataFim %></p>
+<%= link_to "Editar", :controller => "Propaganda", :action => "update", :id => @propaganda.id %>
+<%= link_to "Voltar", :controller => "Estabelecimento", :action => "home" %>

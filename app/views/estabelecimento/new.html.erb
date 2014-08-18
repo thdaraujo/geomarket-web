@@ -2,16 +2,16 @@
 <div class="FormCadastro">
   <h1>Sign Up</h1>
   <%= form_for(:estabelecimento, :url => {:controller => 'estabelecimento', :action => 'create'}) do |f| %>
-    <p> Nome:</br> <%= f.text_field :nome%> </p>
-    <p> Endereço:</br> <%= f.text_field :logradouro%></p>
-    <p> Numero:</br> <%= f.text_field :numero%></p>
-    <p> Complemento:</br> <%= f.text_field :complemento%></p>
-    <p> Email:</br> <%= f.text_field :email%> </p>
-    <p> Senha:</br> <%= f.password_field :password%></p>
-    <p> Confirmação de Senha:</br> <%= f.password_field :password_confirmation%> </p>
+    <p> Nome:</p><p> <%= f.text_field :nome%> </p>
+    <p> Endereço:</p><p> <%= f.text_field :logradouro%></p>
+    <p> Numero:</p><p> <%= f.text_field :numero%></p>
+    <p> Complemento:</p><p> <%= f.text_field :complemento%></p>
+    <p> Email:</p><p> <%= f.text_field :email%> </p>
+    <p> Senha:</p><p> <%= f.password_field :password%></p>
+    <p> Confirmação de Senha:</p><p> <%= f.password_field :password_confirmation%> </p>
     <%= f.submit :Signup %>
   <% end %>
-<% if @estabelecimento.errors.any? %>
+  <% if @estabelecimento.errors.any? %>
     <ul class="ErrosCadastro">
     <% for message_error in @estabelecimento.errors.full_messages %>
       <li>* <%= message_error %></li>

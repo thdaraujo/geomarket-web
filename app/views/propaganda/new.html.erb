@@ -1,0 +1,21 @@
+<% @page_title = "GeoMarket! | Cadastro de Estabelecimento" %>
+<div class="formPropaganda"%>
+  <h1>Criar nova propaganda</h1>
+  <%= form_for(:propaganda, :url => {:controller => 'propaganda', :action => 'create'}) do |p| %>
+    <p>Título: <br/> <%= p.text_field :titulo%></p>
+    <p>Mensagem: <br/> <%= p.text_area :corpo%></p>
+    <p>Link: <br/> <%= p.text_field :link%></p>
+  
+    <p>Data de Início: <br/> <%= p.datetime_select :dataInicio, :ampm => false, :minute_step => 10 %></p>
+    <p>Data de Fim: <br/> <%= p.datetime_select :dataFim, :ampm => false, :minute_step => 10 %></p>
+    <%= p.submit :Cadastrar %>
+    <br><%= link_to "Voltar", :controller => "Estabelecimento", :action => :home %>
+  <% end %>
+  <% if @propaganda.errors.any? %>
+    <ul class="ErrosPropaganda">
+      <% for message_error in @propaganda.errors.full_messages %>
+      <li>* <%= message_error %></li>
+      <% end %>
+    </ul>
+  <% end %>
+</div>

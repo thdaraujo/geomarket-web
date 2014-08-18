@@ -15,7 +15,7 @@ class EstabelecimentoController < ApplicationController
       flash[:notice] = "Form is invalid"
       flash[:color]= "invalid"
     end
-    render "new"
+    render "login"
   end
   
   def login
@@ -41,7 +41,7 @@ class EstabelecimentoController < ApplicationController
   def logout
     session[:user_id] = nil
     flash[:notice] = "Sessão finalizada com sucesso!"
-    redirect_to(:controller => "Estabelecimento", :action => "login")
+    redirect_to(:controller => "Home", :action => "index")
   end
   
   private
