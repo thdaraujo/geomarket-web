@@ -13,11 +13,12 @@ class PropagandaController < ApplicationController
     if @propaganda.save
       flash[:notice] = "Propaganda criada com sucesso!"
       flash[:color]= "valid"
+      redirect_to(:controller => "Estabelecimento", :action => "home")
     else
       flash[:notice] = "Não foi possível criar a propaganda. =("
       flash[:color]= "invalid"
+      render "new"
     end
-    redirect_to(:controller => "Estabelecimento", :action => "home")
   end
 
   def update
