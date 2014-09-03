@@ -19,7 +19,9 @@ gem 'bcrypt-ruby', :require => 'bcrypt'
 # Bootstrap and auto-prefixer
 gem 'bootstrap-sass'
 gem 'autoprefixer-rails'
-
+# For the theme sb-admin
+gem 'font-awesome-rails'
+gem 'less-rails'
 
 # Use SCSS for stylesheets
 gem 'sass-rails', '~> 4.0.3'
