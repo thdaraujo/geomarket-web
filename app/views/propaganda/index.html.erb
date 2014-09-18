@@ -1,21 +1,11 @@
 <h1>Lista de propagandas</h1>
-<table>
-  <tr>
-    <th>Titulo</th>
-    <th>Descrição</th>
-    <th>Link</th>
-    <th>Data de Início</th>
-    <th>Data de Fim</th>
-    <th colspan="2"></th>
-  </tr>
-  <% @propagandas.each do |propaganda| %>
-    <tr>
-      <td><%= propaganda.titulo %></td>
-      <td><%= propaganda.corpo %></td>
-      <td><%= propaganda.link %></td>
-      <td><%= propaganda.dataInicio %></td>
-      <td><%= propaganda.dataFim %></td>
-      <td><%= link_to('Show', :controller => :propaganda, :action => :show, :id => propaganda.id) %></td>
-    </tr>
-  <% end %>
-</table>
+<div class="pull-right">
+  <%= link_to 'Nova Propaganda', { :controller => :propaganda, :action => :new}, :class => 'btn btn-success' %>
+</div>
+<br>
+<br>
+<div class="row-fluid">
+  <div class="col-md-12">
+    <%= render partial: 'shared/table_propagandas', :locals => {:propagandas => @propagandas} %>
+  </div>
+</div>

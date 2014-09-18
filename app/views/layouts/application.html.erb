@@ -7,7 +7,7 @@
     <%= csrf_meta_tags %>
 </head>
 <body>
-  <%= render "shared/navbar" %>
+  <%= render 'shared/navbar' %>
     <div class="container">
       <% if !flash[:error].to_s.empty? %>
       <div class="alert alert-danger alert-dismissible" role="alert">
@@ -21,7 +21,9 @@
         <%= flash[:info] %>
       </div>
       <% end %>
-      <%= yield %>
+      <div class="container-fluid">
+        <%= yield %>
+      </div>
   </div>
 </body>
 </html>

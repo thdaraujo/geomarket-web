@@ -1,0 +1,38 @@
+pt:
+  activerecord:
+    models:
+      propaganda: 'Propaganda'
+    attributes:
+      propaganda:
+        titulo: 'Título'
+        corpo: 'Mensagem'
+        link: 'Link'
+        dataInicio: 'Data de Início'
+        dataFim: 'Data de Fim'
+    errors:
+      models:
+        propaganda:
+          attributes:
+            titulo:
+              blank: 'é obrigatório.'
+              too_short: 'é muito curto. Mínimo de %{count} caracteres.'
+              too_long: 'é muito longo. Máximo de %{count} caracteres.'
+            corpo:
+              blank: 'é obrigatória.'
+              too_short: 'é muito curta. Mínimo de %{count} caracteres.'
+              too_long: 'é muito longa. Máximo de %{count} caracteres.'
+            link:
+              blank: 'é obrigatório.'
+              too_short: 'é muito curto. Mínimo de %{count} caracteres.'
+              too_long: 'é muito longo. Máximo de %{count} caracteres.'
+            dataInicio:
+            dataFim:
+  date:
+    order:
+      - :day
+      - :month
+      - :year
+    month_names:
+      [~, Janeiro, Fevereiro, Março, Abril, Maio, Junho, Julho, Agosto, Setembro, Outubro, Novembro, Dezembro]
+    abbr_month_names:
+      [~, Jan, Fev, Mar, Abr, Mai, Jun, Jul, Ago, Set, Out, Nov, Dez]

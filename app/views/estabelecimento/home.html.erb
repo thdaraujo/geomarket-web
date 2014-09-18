@@ -1,25 +1,6 @@
 <% @page_title = "GeoMarket! | #{@current_user.nome}" -%>
   <h2 class='User_Header'>Perfil de <%=@current_user.nome%><h2>
 <h2>Lista de propagandas</h2>
-<table>
-  <tr>
-    <th>Titulo</th>
-    <th>Descrição</th>
-    <th>Link</th>
-    <th>Data de Início</th>
-    <th>Data de Fim</th>
-    <th colspan="2"></th>
-  </tr>
-  <% @current_user.propagandas.each do |propaganda| %>
-    <tr>
-      <td><%= propaganda.titulo %></td>
-      <td><%= propaganda.corpo %></td>
-      <td><%= propaganda.link %></td>
-      <td><%= propaganda.dataInicio %></td>
-      <td><%= propaganda.dataFim %></td>
-      <td><%= link_to('Show', :controller => :propaganda, :action => :show, :id => propaganda.id) %></td>
-    </tr>
-  <% end %>
-</table>
-<%= link_to "Criar propaganda", :controller => "Propaganda", :action => "new" %>
-<%= link_to "Logout", :controller => "Estabelecimento", :action => "logout" %>
+<%= render partial: 'shared/table_propagandas', :locals => {:propagandas => @current_user.propagandas} %>
+<%= link_to 'Criar propaganda', :controller => :propaganda, :action => :new %>
+<%= link_to 'Logout', :controller => :estabelecimento, :action => :logout %>

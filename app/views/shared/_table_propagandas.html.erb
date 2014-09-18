@@ -1,0 +1,20 @@
+<table class="table table-striped">
+  <tr>
+    <th>Titulo</th>
+    <th>Descrição</th>
+    <th>Link</th>
+    <th>Data de Início</th>
+    <th>Data de Fim</th>
+    <th colspan="2"></th>
+  </tr>
+  <% propagandas.each do |propaganda| %>
+      <tr>
+        <td><%= propaganda.titulo %></td>
+        <td><%= propaganda.corpo %></td>
+        <td><%= propaganda.link %></td>
+        <td><%= propaganda.dataInicio %></td>
+        <td><%= propaganda.dataFim %></td>
+        <td><%= link_to('Show', :controller => :propaganda, :action => :show, :id => propaganda.id) %></td>
+      </tr>
+  <% end %>
+</table>

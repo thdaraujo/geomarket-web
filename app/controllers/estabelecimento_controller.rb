@@ -9,13 +9,13 @@ class EstabelecimentoController < ApplicationController
   def create
     @estabelecimento = Estabelecimento.new(estab_params)
     if @estabelecimento.save
-      flash[:notice] = "You signed up successfully"
-      flash[:color]= "valid"
+      flash[:notice] = 'You signed up successfully'
+      flash[:color]= 'valid'
     else
-      flash[:notice] = "Form is invalid"
-      flash[:color]= "invalid"
+      flash[:notice] = 'Form is invalid'
+      flash[:color]= 'invalid'
     end
-    render "login"
+    render 'login'
   end
   
   def login
@@ -26,11 +26,11 @@ class EstabelecimentoController < ApplicationController
     authorized_user = Estabelecimento.authenticate(params[:username_or_email], params[:login_password])
     if authorized_user
       session[:user_id] = authorized_user.id
-      flash[:info] = "Bem vindo, #{authorized_user.nome}"
-      redirect_to(:action => "home")
+      flash[:info] = 'Bem vindo, #{authorized_user.nome}'
+      redirect_to(:action => 'home')
     else
-      flash[:error] = "Nome de usuário ou senha inválidos."
-      render "login"
+      flash[:error] = 'Nome de usuário ou senha inválidos.'
+      render 'login'
     end
   end
   
@@ -39,8 +39,8 @@ class EstabelecimentoController < ApplicationController
   
   def logout
     session[:user_id] = nil
-    flash[:notice] = "Sessão finalizada com sucesso!"
-    redirect_to(:controller => "Home", :action => "index")
+    flash[:notice] = 'Sessão finalizada com sucesso!'
+    redirect_to(:controller => 'Home', :action => 'index')
   end
   
   private

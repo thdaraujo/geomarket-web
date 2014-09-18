@@ -1,21 +1,43 @@
-<% @page_title = "GeoMarket! | Cadastro de Estabelecimento" %>
-<div class="formPropaganda"%>
-  <h1>Criar nova propaganda</h1>
-  <%= form_for(:propaganda, :url => {:controller => 'propaganda', :action => 'create'}) do |p| %>
-    <p>Título: <br/> <%= p.text_field :titulo%></p>
-    <p>Mensagem: <br/> <%= p.text_area :corpo%></p>
-    <p>Link: <br/> <%= p.text_field :link%></p>
-  
-    <p>Data de Início: <br/> <%= p.datetime_select :dataInicio, :ampm => false, :minute_step => 10 %></p>
-    <p>Data de Fim: <br/> <%= p.datetime_select :dataFim, :ampm => false, :minute_step => 10 %></p>
-    <%= p.submit :Cadastrar %>
-    <br><%= link_to "Voltar", :controller => "Estabelecimento", :action => :home %>
-  <% end %>
-  <% if @propaganda.errors.any? %>
-    <ul class="ErrosPropaganda">
+<% @page_title = "GeoMarket! | Nova Propaganda" %>
+<h1>Criar nova propaganda</h1>
+<% if @propaganda.errors.any? %>
+    <ul class="alert alert-danger">
       <% for message_error in @propaganda.errors.full_messages %>
-      <li>* <%= message_error %></li>
+          <li><%= message_error %></li>
       <% end %>
     </ul>
-  <% end %>
-</div>
+<% end %>
+<%= form_for(:propaganda, :url => {:controller => :propaganda, :action => :create}, html: {class: "form-horizontal", role: "form"}) do |p| %>
+    <div class="form-group">
+      <label for="propaganda_titulo" class="col-sm-2 control-label">Tìtulo</label>
+      <div class="col-sm-10">
+        <%= p.text_field :titulo%>
+      </div>
+    </div>
+    <div class="form-group">
+      <label for="propaganda_corpo" class="col-sm-2 control-label">Mensagem</label>
+      <div class="col-sm-10">
+        <%= p.text_field :corpo%>
+      </div>
+    </div>
+    <div class="form-group">
+      <label for="propaganda_link" class="col-sm-2 control-label">Link</label>
+      <div class="col-sm-10">
+        <%= p.text_field :link %>
+      </div>
+    </div>
+    <div class="form-group">
+      <label for="propaganda_dataInicio" class="col-sm-2 control-label">Data de Início</label>
+      <div class="col-sm-10">
+        <%= p.datetime_select :dataInicio, :ampm => false, :minute_step => 10 %>
+      </div>
+    </div>
+    <div class="form-group">
+      <label for="propaganda_dataFim" class="col-sm-2 control-label">Data de Fim</label>
+      <div class="col-sm-10">
+        <%= p.datetime_select :dataFim, :ampm => false, :minute_step => 10 %>
+      </div>
+    </div>
+    <%= p.submit :Cadastrar, :class => 'btn btn-primary' %>
+<br><%= link_to 'Voltar', :controller => :estabelecimento, :action => :home %>
+<% end %>
