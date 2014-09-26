@@ -37,8 +37,15 @@ class Usuario < ActiveRecord::Base
   end
 
   def get_token
-    if this.tokens.
-    #TODO: Adicionar tabela de Tokens, relacionar ao Usuário e devolver um token neste método
-    return 'asdkansdjnasdnasodna232131n2j3n1o23noac90m9ng94n23'
+    @usuario_tokens = self.tokens
+    @token = @usuario_tokens.find{|t| t.ativo}
+    if @token.nil?
+      @token = Token.new
+      @token.token = SecureRandom.uuid
+      @token.ativo = true
+      @token.device_id = 0
+      self.tokens.create(token: @token.token, ativo: @token.ativo, device_id: @token.device_id)
+    end
+    return @token
   end
 end
