@@ -11,6 +11,10 @@ pt:
         dataFim: 'Data de Fim'
     errors:
       models:
+        usuario:
+          attributes:
+            email:
+              taken: '%{value} já está em uso'
         propaganda:
           attributes:
             titulo:
