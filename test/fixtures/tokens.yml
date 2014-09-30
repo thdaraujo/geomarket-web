@@ -1,0 +1,13 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  UsuarioId: 
+  Token: MyString
+  DeviceId: 
+  Ativo: false
+
+two:
+  UsuarioId: 
+  Token: MyString
+  DeviceId: 
+  Ativo: false

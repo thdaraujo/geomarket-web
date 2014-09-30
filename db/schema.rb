@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20140722164454) do
+ActiveRecord::Schema.define(version: 20140928153653) do
 
   create_table "estabelecimentos", force: true do |t|
     t.string   "nome"
@@ -56,6 +56,15 @@ ActiveRecord::Schema.define(version: 20140722164454) do
   create_table "tipo_propagandas", force: true do |t|
     t.string   "tipo"
     t.string   "descricao"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  create_table "tokens", force: true do |t|
+    t.integer  "usuario_id"
+    t.string   "token"
+    t.integer  "device_id"
+    t.boolean  "ativo"
     t.datetime "created_at"
     t.datetime "updated_at"
   end

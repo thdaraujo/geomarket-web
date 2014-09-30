@@ -1,13 +1,13 @@
 class Usuario < ActiveRecord::Base
   has_and_belongs_to_many :tipo_propagandas
   has_and_belongs_to_many :propagandas
+  has_many :tokens
 
   # Attributes
   attr_accessor :password
   EMAIL_REGEX = /\A[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,4}\Z/i
-  validates :password, :presence => true, :length => { :in => 6..20 }, :confirmation => true, :on => :create
-
   validates :email, :presence => true, :uniqueness => true, :format => EMAIL_REGEX
+  validates :password, :presence => true, :length => { :in => 6..20 }, :confirmation => true, :on => :create
 
   # Methods
   before_save :encrypt_password
@@ -37,6 +37,7 @@ class Usuario < ActiveRecord::Base
   end
 
   def get_token
+    if this.tokens.
     #TODO: Adicionar tabela de Tokens, relacionar ao Usuário e devolver um token neste método
     return 'asdkansdjnasdnasodna232131n2j3n1o23noac90m9ng94n23'
   end

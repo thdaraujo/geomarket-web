@@ -2,11 +2,6 @@ class ApiController < ApplicationController
   skip_before_action :verify_authenticity_token
   respond_to :json, :xml
 
-  def index
-    @test = 'Weeee'
-    respond_with @test
-  end
-
   def user_login
     authorized_user_token = Usuario.authenticate(params[:username_or_email], params[:login_password])
     if authorized_user_token
