@@ -28,31 +28,6 @@ class ApiController < ApplicationController
     end
   end
 
-  def propagandas_usuario
-    errors = []
-    @token = Token.find_by_token(params[:token])
-    if @token
-      @usuario = Usuario.find(@token.usuario_id)
-      if @usuario
-        @propagandas = @usuario.propagandas
-      else
-        errors.push('Usuario não encontrado')
-      end
-    else
-      errors.push('Token não encontrado')
-    end
-
-    if errors.length > 0
-      respond_to do |format|
-        format.json { render json: { :data => {:errors => errors }}, status: :bad_request }
-      end
-    else
-      respond_to do |format|
-        format.json { render json: { :data => {:propagandas => @propagandas }}, status: :ok }
-      end
-    end
-  end
-
   def assina_estabelecimento
     errors = []
     message = ''
@@ -137,6 +112,77 @@ class ApiController < ApplicationController
     else
       respond_to do |format|
         format.json { render json: { :data => message }, status: :ok }
+      end
+    end
+  end
+
+  def avalia_propaganda
+    errors = []
+    if params[:propaganda_id]
+      if params[:gostou]
+        if Propaganda.exists?(params[:propaganda_id])
+          @token = Token.find_by_token(params[:token])
+          if @token
+            @usuario = Usuario.find(@token.usuario_id)
+            if @usuario
+              @propaganda = Propaganda.find(params[:propaganda_id])
+              @propaganda_usuario = @usuario.propagandas_usuarios.all.select{|up| up.propaganda_id == @propaganda.id}.first
+              if @propaganda_usuario
+                @propaganda_usuario.gostou = params[:gostou]
+                @propaganda_usuario.save
+              else
+                #@usuario.propagandas << Propaganda.find(1)
+                errors.push('A propaganda não foi encontrada para esse usuário')
+              end
+            else
+              errors.push('Usuario não encontrado')
+            end
+          else
+            errors.push('Token não encontrado')
+          end
+        else
+          errors.push('Propaganda não existe')
+        end
+      else
+        errors.push('Parâmetro gostou não encontrado')
+      end
+    else
+      errors.push('Parâmetro propaganda_id não encontrado')
+    end
+
+    #Return
+    if errors.length > 0
+      respond_to do |format|
+        format.json { render json: { :data => {:errors => errors }}, status: :bad_request }
+      end
+    else
+      respond_to do |format|
+        format.json { render json: { :data => {:propaganda_usuario => @propaganda_usuario }}, status: :ok }
+      end
+    end
+  end
+
+  def propagandas_usuario
+    errors = []
+    @token = Token.find_by_token(params[:token])
+    if @token
+      @usuario = Usuario.find(@token.usuario_id)
+      if @usuario
+        @propagandas = @usuario.propagandas
+      else
+        errors.push('Usuario não encontrado')
+      end
+    else
+      errors.push('Token não encontrado')
+    end
+
+    if errors.length > 0
+      respond_to do |format|
+        format.json { render json: { :data => {:errors => errors }}, status: :bad_request }
+      end
+    else
+      respond_to do |format|
+        format.json { render json: { :data => {:propagandas => @propagandas }}, status: :ok }
       end
     end
   end
