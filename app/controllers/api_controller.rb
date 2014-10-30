@@ -31,7 +31,7 @@ class ApiController < ApplicationController
   def assina_estabelecimento
     errors = []
     message = ''
-    if params[:estabelecimento_id]
+    if params[:estabelecimento_id]  # Mudar para uma string mais friendly e única
       if Estabelecimento.exists?(params[:estabelecimento_id])
         @token = Token.find_by_token(params[:token])
         if @token && Usuario.exists?(@token.usuario_id  )
@@ -168,7 +168,7 @@ class ApiController < ApplicationController
     if @token
       @usuario = Usuario.find(@token.usuario_id)
       if @usuario
-        @propagandas = @usuario.propagandas
+        @propagandas = @usuario.propagandas # Deveria usar tabela propagandas_usuarios
       else
         errors.push('Usuario não encontrado')
       end

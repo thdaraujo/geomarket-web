@@ -7,6 +7,7 @@ gem 'rails', '4.1.2'
 
 group :development do
   gem 'sqlite3'
+  gem "better_errors"
 end
 group :production do
   gem 'pg'
@@ -40,6 +41,11 @@ gem 'sdoc', '~> 0.4.0',          group: :doc
 
 # Spring speeds up development by keeping your application running in the background. Read more: https://github.com/rails/spring
 gem 'spring',        group: :development
+
+# Makes everything works on Windows
+gem 'tzinfo-data', platforms: [:mingw, :mswin]
+require 'rbconfig'
+gem 'wdm', '>= 0.1.0' if RbConfig::CONFIG['target_os'] =~ /mswin|mingw|cygwin/i
 
 # Use ActiveModel has_secure_password
 # gem 'bcrypt', '~> 3.1.7'
