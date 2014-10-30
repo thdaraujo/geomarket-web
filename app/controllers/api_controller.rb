@@ -31,13 +31,13 @@ class ApiController < ApplicationController
   def assina_estabelecimento
     errors = []
     message = ''
-    if params[:estabelecimento_id]  # Mudar para uma string mais friendly e única
-      if Estabelecimento.exists?(params[:estabelecimento_id])
+    if params[:estab_token]
+      if Estabelecimento.exists?(:estab_token => params[:estab_token])
         @token = Token.find_by_token(params[:token])
         if @token && Usuario.exists?(@token.usuario_id  )
           @usuario = Usuario.find(@token.usuario_id)
           if @usuario
-            @estabelecimento = Estabelecimento.find(params[:estabelecimento_id])
+            @estabelecimento = Estabelecimento.find_by_estab_token(params[:estab_token])
             if @estabelecimento
               if @usuario.estabelecimentos.include?(@estabelecimento)
                 message = 'Assinatura já existe'
@@ -58,7 +58,7 @@ class ApiController < ApplicationController
         errors.push('Estabelecimento não encontrado')
       end
     else
-      errors.push('Parâmetro estabelecimento_id não encontrado')
+      errors.push('Parâmetro estab_token não encontrado')
     end
 
     if errors.length > 0
@@ -75,13 +75,13 @@ class ApiController < ApplicationController
   def remove_estabelecimento
     errors = []
     message = ''
-    if params[:estabelecimento_id]
-      if Estabelecimento.exists?(params[:estabelecimento_id])
+    if params[:estab_token]
+      if Estabelecimento.exists?(:estab_token => params[:estab_token])
         @token = Token.find_by_token(params[:token])
         if @token && Usuario.exists?(@token.usuario_id  )
           @usuario = Usuario.find(@token.usuario_id)
           if @usuario
-            @estabelecimento = Estabelecimento.find(params[:estabelecimento_id])
+            @estabelecimento = Estabelecimento.find_by_estab_token(params[:estab_token])
             if @estabelecimento
               if @usuario.estabelecimentos.include?(@estabelecimento)
                 @usuario.estabelecimentos.delete(@estabelecimento)
@@ -184,6 +184,13 @@ class ApiController < ApplicationController
       respond_to do |format|
         format.json { render json: { :data => {:propagandas => @propagandas }}, status: :ok }
       end
+    end
+  end
+  
+  def teste
+    @teste = params[:teste]
+    respond_to do |format|
+      format.json { render json: { :data => @teste }, status: :ok }
     end
   end
 

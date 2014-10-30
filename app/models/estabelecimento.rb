@@ -14,14 +14,22 @@ class Estabelecimento < ActiveRecord::Base
   validates :password, :presence => true, :length => { :in => 6..20 }, :confirmation => true, :on => :create
   
   # Methods
-  before_save :encrypt_password
+  before_save :encrypt_password, :generate_token
   after_save :clear_password
+  
   def encrypt_password
     if password.present?
       self.salt = BCrypt::Engine.generate_salt
       self.hashsenha= BCrypt::Engine.hash_secret(password, salt)
     end
   end
+  
+  def generate_token
+    if !estab_token.present?
+      self.estab_token = SecureRandom.base64(9)[0..6]
+    end
+  end
+  
   def clear_password
     self.password = nil
   end

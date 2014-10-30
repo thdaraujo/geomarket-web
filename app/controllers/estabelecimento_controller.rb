@@ -26,7 +26,7 @@ class EstabelecimentoController < ApplicationController
     authorized_user = Estabelecimento.authenticate(params[:username_or_email], params[:login_password])
     if authorized_user
       session[:user_id] = authorized_user.id
-      flash[:info] = 'Bem vindo, #{authorized_user.nome}'
+      flash[:info] = 'Bem vindo, ' + authorized_user.nome.to_s
       redirect_to(:action => 'home')
     else
       flash[:error] = 'Nome de usuário ou senha inválidos.'
