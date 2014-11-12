@@ -5,6 +5,7 @@ class Estabelecimento < ActiveRecord::Base
 
   # Attributes
   attr_accessor :password
+  attr_accessor :estab_token
   EMAIL_REGEX = /\A[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,4}\Z/i
   validates :nome, :presence => true, :uniqueness => true, :length => { :in => 3..50 }
   validates :logradouro, :presence => true, :uniqueness => false, :length => { :in => 3..50 }
