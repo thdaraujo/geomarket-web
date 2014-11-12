@@ -11,11 +11,12 @@ class EstabelecimentoController < ApplicationController
     if @estabelecimento.save
       flash[:notice] = 'You signed up successfully'
       flash[:color]= 'valid'
+	  render 'login'
     else
       flash[:notice] = 'Form is invalid'
       flash[:color]= 'invalid'
+	  render 'new'
     end
-    render 'login'
   end
   
   def login
