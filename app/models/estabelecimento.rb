@@ -26,7 +26,7 @@ class Estabelecimento < ActiveRecord::Base
   end
   
   def generate_token
-    if !estab_token.present?
+    if !estab_token
       self.estab_token = SecureRandom.base64(9)[0..6]
     end
   end
