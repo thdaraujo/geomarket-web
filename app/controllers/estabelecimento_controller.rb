@@ -9,13 +9,11 @@ class EstabelecimentoController < ApplicationController
   def create
     @estabelecimento = Estabelecimento.new(estab_params)
     if @estabelecimento.save
-      flash[:notice] = 'Login efetuado!'
-      flash[:color]= 'valid'
-    redirect_to(:action => 'login')
+      flash[:success] = 'Cadastro efetuado!'
+	  redirect_to(:action => 'login')
     else
-      flash[:notice] = 'Não foi possível efetuar seu login'
-      flash[:color]= 'invalid'
-    redirect_to(:action => 'new')
+      flash[:error] = 'Não foi possível efetuar seu cadastro'
+      redirect_to(:action => 'new')
     end
   end
   
