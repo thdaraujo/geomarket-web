@@ -6,4 +6,5 @@
     <p>Senha:</br> <%= password_field_tag :login_password %></p> 
     <%= submit_tag("Log In") %>
   <% end %>
+  <%= link_to 'Esqueci minha senha', :controller => :estabelecimento, :action => :forgot_password %>
 </div>
