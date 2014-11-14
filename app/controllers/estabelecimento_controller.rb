@@ -11,11 +11,12 @@ class EstabelecimentoController < ApplicationController
     if @estabelecimento.save
       flash[:notice] = 'Login efetuado!'
       flash[:color]= 'valid'
+    redirect_to(:action => 'login')
     else
       flash[:notice] = 'Não foi possível efetuar seu login'
       flash[:color]= 'invalid'
+    redirect_to(:action => 'new')
     end
-    redirect_to(:action => 'login')
   end
   
   def login
