@@ -10,6 +10,8 @@ Rails.application.routes.draw do
   get 'propaganda/index'
 
   get 'propaganda/show'
+  
+  get 'estabelecimento/new'
 
   get 'home/index'
 

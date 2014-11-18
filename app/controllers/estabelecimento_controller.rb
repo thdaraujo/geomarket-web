@@ -4,7 +4,9 @@ class EstabelecimentoController < ApplicationController
   before_filter :check_login_state, :only => [:new, :create, :login, :login_attempt, :forgot_password]
   
   def new
-    @estabelecimento = Estabelecimento.new 
+	if !@estabelecimento
+		@estabelecimento = Estabelecimento.new
+	end
   end
   def create
     @estabelecimento = Estabelecimento.new(estab_params)
@@ -16,7 +18,7 @@ class EstabelecimentoController < ApplicationController
     else
 	  puts 'Falhou'
       flash[:error] = 'Não foi possível efetuar seu cadastro'
-      redirect_to(:action => 'new')
+      render 'new'
     end
   end
   
