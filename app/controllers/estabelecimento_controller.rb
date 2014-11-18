@@ -8,10 +8,13 @@ class EstabelecimentoController < ApplicationController
   end
   def create
     @estabelecimento = Estabelecimento.new(estab_params)
+	puts 'Recebi ' + @estabelecimento.inspect
     if @estabelecimento.save
+	  puts 'Salvou'
       flash[:success] = 'Cadastro efetuado!'
 	  redirect_to(:action => 'login')
     else
+	  puts 'Falhou'
       flash[:error] = 'Não foi possível efetuar seu cadastro'
       redirect_to(:action => 'new')
     end
