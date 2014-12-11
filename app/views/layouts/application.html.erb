@@ -21,6 +21,12 @@
         <%= flash[:info] %>
       </div>
       <% end %>
+      <% if !flash[:success].to_s.empty? %>
+      <div class="alert alert-success alert-dismissible" role="alert">
+        <button type="button" class="close" data-dismiss="alert"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
+        <%= flash[:success] %>
+      </div>
+      <% end %>
       <div class="container-fluid">
         <%= yield %>
       </div>
