@@ -23,7 +23,7 @@ class ApiController < ApplicationController
     @usuario = Usuario.new(user_params)
     if @usuario.save
       respond_to do |format|
-        format.json { render json: { :data => 'Usuário criado com sucesso!' }, status: :created }
+        format.json { render json: { :data => { :user_uid => @usuario.uid } }, status: :created }
       end
     else
       respond_to do |format|
