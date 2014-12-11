@@ -28,7 +28,12 @@ class ApplicationController < ActionController::Base
   end
   def check_user
     if session[:user_id]
-      @current_user = Estabelecimento.find(session[:user_id])
+      if !Estabelecimento.exists?(session[:user_id])
+        session[:user_id] = nil
+        redirect_to(:controller => "Home", :action => "index")
+      else
+        @current_user = Estabelecimento.find(session[:user_id])
+      end
     end
     return true
   end

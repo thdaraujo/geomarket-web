@@ -8,36 +8,42 @@ class Usuario < ActiveRecord::Base
   # Attributes
   attr_accessor :password
   EMAIL_REGEX = /\A[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,4}\Z/i
-  validates :email, :presence => true, :uniqueness => true, :format => EMAIL_REGEX
+  validates :uid, :uniqueness => true
+  validate :email, :uniqueness => true, :format => EMAIL_REGEX
   validates :password, :presence => true, :length => { :in => 6..20 }, :confirmation => true, :on => :create
 
   # Methods
-  before_save :encrypt_password
+  before_save :encrypt_password, :generate_uid
   after_save :clear_password
-  
+
+  def generate_uid
+    self.uid = SecureRandom.hex(16)
+  end
+
   def encrypt_password
     if password.present?
       self.salt = BCrypt::Engine.generate_salt
       self.hashsenha= BCrypt::Engine.hash_secret(password, salt)
     end
   end
-  
+
   def clear_password
     self.password = nil
   end
 
-  def self.authenticate(username_or_email="", login_password="")
-    if  EMAIL_REGEX.match(username_or_email)
-      usuario = Usuario.find_by_email(username_or_email)
+  def self.authenticate(uid="", password="")
+    puts uid
+    if uid
+      usuario = Usuario.find_by_uid(uid)
     end
-    if usuario && usuario.match_password(login_password)
+    if usuario && usuario.match_password(password)
       return usuario.get_token()
     else
       return false
     end
   end
-  def match_password(login_password="")
-    hashsenha == BCrypt::Engine.hash_secret(login_password, salt)
+  def match_password(password="")
+    hashsenha == BCrypt::Engine.hash_secret(password, salt)
   end
 
   def get_token

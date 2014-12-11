@@ -1,13 +1,13 @@
 class ApiController < ApplicationController
   skip_before_action :verify_authenticity_token
   respond_to :json, :xml
-  
+
   def initialize
     @NUMERO_PROPAGANDAS = 6
   end
 
   def login_usuario
-    authorized_user_token = Usuario.authenticate(params[:username_or_email], params[:login_password])
+    authorized_user_token = Usuario.authenticate(params[:uid], params[:password])
     if authorized_user_token
       respond_to do |format|
         format.json { render json: { :data => { :user_token => authorized_user_token.token } }, status: :ok }
@@ -191,7 +191,7 @@ class ApiController < ApplicationController
                 @novas_propagandas << n_prop
                 @usuario.propagandas << n_prop
                 puts 'Adicionou novas propagandas'
-              end 
+              end
             end
           end
           @propagandas.concat @novas_propagandas
@@ -216,7 +216,7 @@ class ApiController < ApplicationController
       end
     end
   end
-  
+
   def teste
     @teste = params[:teste]
     respond_to do |format|
@@ -229,4 +229,3 @@ class ApiController < ApplicationController
     params.require(:usuario).permit(:email, :password, :password_confirmation)
   end
 end
-
