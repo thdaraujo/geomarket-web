@@ -10,11 +10,11 @@ class ApiController < ApplicationController
     authorized_user_token = Usuario.authenticate(params[:uid], params[:password])
     if authorized_user_token
       respond_to do |format|
-        format.json { render json: { :data => { :user_token => authorized_user_token.token } }, status: :ok }
+        format.json { render json: { :user_token => authorized_user_token.token }, status: :ok }
         end
       else
         respond_to do |format|
-          format.json { render json: { :data => { :errors => 'Login falhou' } }, status: :bad_request }
+          format.json { render json: { :errors => 'Login falhou' }, status: :bad_request }
         end
     end
   end
@@ -23,11 +23,11 @@ class ApiController < ApplicationController
     @usuario = Usuario.new(user_params)
     if @usuario.save
       respond_to do |format|
-        format.json { render json: { :data => { :user_uid => @usuario.uid } }, status: :created }
+        format.json { render json: { :user_uid => @usuario.uid }, status: :created }
       end
     else
       respond_to do |format|
-        format.json { render json: { :data => { :errors => @usuario.errors } }, status: :unprocessable_entity }
+        format.json { render json: { :errors => @usuario.errors }, status: :unprocessable_entity }
       end
     end
   end
